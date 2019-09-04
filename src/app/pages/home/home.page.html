@@ -11,10 +11,16 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items" [routerLink]="['/update-item', item.id]">
-      <ion-label>
+    <ion-item *ngFor="let item of items; let i = index">
+      <ion-label [routerLink]="['/view-item', item.id]">
         {{ item.title }}
       </ion-label>
+        <ion-button (click)="updateItem(item.id)">
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteItem(i)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
