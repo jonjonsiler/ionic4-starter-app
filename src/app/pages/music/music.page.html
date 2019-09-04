@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>music</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+
+    <ion-item>
+      <ion-label>Select search type</ion-label>
+      <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+        <ion-select-option value="q">All</ion-select-option>
+        <ion-select-option value="artist_name">Artist Name</ion-select-option>
+        <ion-select-option value="album_name">Album Name</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-list>
+        <ion-item button *ngFor="let item of (results | async)" [routerLink]="['/', 'music', item]">
+          <ion-avatar slot="start">
+            <img [src]="item.cover_image" *ngIf="item.cover_image">
+          </ion-avatar>
+     
+          <ion-label text-wrap>
+            <h3>{{ item.title }}</h3>
+            {{ item.Year }}
+          </ion-label>
+     
+          <ion-icon slot="end" *ngIf="item.Type == 'movie'" name="videocam"></ion-icon>
+          <ion-icon slot="end" *ngIf="item.Type == 'series'" name="tv"></ion-icon>
+          <ion-icon slot="end" *ngIf="item.Type == 'game'" name="logo-game-controller-b"></ion-icon>
+     
+        </ion-item>
+    </ion-list>
+  
+</ion-content>
